@@ -1,0 +1,19 @@
+{
+  "ok" : true ,
+  "channel" : {
+    "id" : "LLLLSSS" ,
+    "name" : "fun" ,
+    "created" : "1360782804" ,
+    "creator" : "LLL" ,
+    "is_archived" : false ,
+    "is_general" : false ,
+    "is_member" : true ,
+    "members" : "" ,
+    "topic" : "" ,
+    "purpose" : "" ,
+    "last_read" : "1401383885.000061" ,
+    "latest" : "" ,
+    "unread_count" : 0,
+    "owner" : "Nati" 
+  }
+}

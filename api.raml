@@ -1,0 +1,132 @@
+#%RAML 1.0
+title: testExamples
+description: Testing examples display - feature branch
+
+
+uses:
+  myTypes: libraries/types.raml
+types:
+  MyObj :
+    type: object
+    properties:
+      ok: boolean
+      creationDate : date-only
+      owner: string
+  MyObjExtendsLibObjWithEx:
+    type: myTypes.LibObjectWithExample
+    description: My Own Channel Info
+    properties:
+      creationDate : date-only
+    examples:
+      ex1:
+        ok: true
+        creationDate: 2016-03-11
+        channel:
+          id: "MyChannelInfoEx1"
+          owner: "Tek"
+      ex2:
+        ok: true
+        creationDate: 2016-04-11
+        channel:
+          id: "MyChannelInfoEx2"
+          owner: "Tek"
+      ex3:
+        ok: true
+        creationDate: 2016-05-11
+        channel:
+          id: "MyChannelInfoEx3"
+          owner: "Tek"
+/CASE1:
+  get:
+    description: ExamplesInTypeAndExampleInResponseIncluded
+    queryParameters:
+      channel:
+        description: Channel to fetch history for.
+        required: true
+        example: C1234567890
+    responses:
+      200:
+        body:
+          application/json:
+            type: myTypes.LibObjectWithExamples
+            example: !include examples/example2.json
+/CASE2:
+  get:
+    description: NoExamplesInTypeAndExampleInResponseIncluded
+    queryParameters:
+      channel:
+        description: Channel to fetch history for.
+        required: true
+        example: C1234567890
+    responses:
+      200:
+        body:
+          application/json:
+            type: myTypes.UsingObj
+            example: !include examples/example2.json
+/CASE3:
+  get:
+    description: ExamplesInTypeAndExamplesInResponse
+    queryParameters:
+      channel:
+        description: Channel to fetch history for.
+        required: true
+        example: C1234567890
+    responses:
+      200:
+        body:
+          application/json:
+            type: myTypes.LibObjectWithExamples
+            examples:
+              example1:
+                ok: true
+                channel:
+                  id: "ex1"
+                  owner: "A"
+              example2:
+                ok: false
+                channel:
+                  id: "ex2"
+                  owner: "B"
+/CASE4:
+  get:
+    description: NoExamplesInTypeAndExamplesInResponseInline
+    queryParameters:
+      channel:
+        description: Channel to fetch history for.
+        required: true
+        example: C1234567890
+    responses:
+      200:
+        body:
+          application/json:
+            type: myTypes.UsingObj
+            examples:
+              example1:
+                ok: true
+                channel:
+                  id: "ex1"
+                  owner: "A"
+              example2:
+                ok: false
+                channel:
+                  id: "ex2"
+                  owner: "B"
+/CASE5:
+  get:
+    description: Testing No Examples In Type And Examples In Response using include. 
+    queryParameters:
+      channel:
+        description: Channel to fetch history for.
+        required: true
+        example: C1234567890
+    responses:
+      200:
+        body:
+          application/json:
+            type: myTypes.UsingObj
+            examples:
+              example1: !include examples/example1.json
+              example2: !include examples/example2.json
+
+      
