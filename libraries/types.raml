@@ -1,0 +1,89 @@
+#%RAML 1.0 Library
+
+usage: Defines types
+types: 
+  BaseObj:
+    type: object
+    properties:
+      id:
+        type: string
+        required: false
+      name:
+        type: string
+        required: false
+      created:
+        type: string
+        required: false
+      creator:
+        type: string
+        required: false
+      is_archived:
+        type: boolean
+        required: false
+      is_general:
+        type: boolean
+        required: false
+      is_member:
+        type: boolean
+        required: false
+      members:
+        type: string
+        required: false
+      topic:
+        type: string
+        required: false
+      purpose:
+        type: string
+        required: false
+      last_read:
+        type: string
+        required: false
+      latest:
+        type: string
+        required: false
+      unread_count:
+        type: number
+        required: false
+  ExtendingObj:
+    type: BaseObj
+    properties: 
+      owner:
+        type : string
+        required: true
+  UsingObj:
+    type: object
+    properties:
+      ok:
+        type: boolean
+        required: false
+      channel:
+        type: ExtendingObj
+        required: true
+    
+  LibObjectWithExamples: 
+    type: UsingObj
+    examples:
+      ChannelInfo1: 
+        ok : false
+        channel: 
+          owner: "channel info 1"
+      ChannelInfo2:
+        ok: true
+        channel:
+          owner: "pp"
+          id: "channel info 2" 
+  LibObjectWithExample: 
+    type: UsingObj
+    example: 
+      ok : false
+      channel: 
+        owner: "single"
+  LibObjectWithExampleIncluded:
+    type: UsingObj
+    example: !include ../examples/example2.json 
+  LibObjectWithExamplesIncluded:
+    type: UsingObj
+    examples: 
+      includedExample1: !include ../examples/example1.json 
+      includedExample2: !include ../examples/example2.json 
+
